@@ -28,12 +28,7 @@ exporters:
       - service:webapi.opentelemetry.datadog
       - env:development
     api:
-      key: 2f79ac1503bf67bb403fb09639d4677a
-
-#exporters:
-#  datadog:
-#    api:
-#      key: 2f79ac1503bf67bb403fb09639d4677a
+      key: <INSERT YOUR API KEY>
 
 service:
   pipelines:
