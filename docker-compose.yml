@@ -1,0 +1,58 @@
+version: "3.1"
+services:
+  web:
+    build: .
+    links:
+      - otel-collector
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      # Configure Open Telemetry Collector Url
+      OTLP__ENDPOINT: "http://otel-collector:4317"
+      
+      # Configure DataDog .NET Profiler
+      #CORECLR_ENABLE_PROFILING: "1"
+      #CORECLR_PROFILER: "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}"
+      #CORECLR_PROFILER_PATH: "/opt/datadog/Datadog.Trace.ClrProfiler.Native.so"
+
+      # Configure Data Dog Agent
+      #DD_INTEGRATIONS: "/opt/datadog/integrations.json"
+      #DD_DOTNET_TRACER_HOME: "/opt/datadog"
+      #DD_TRACE_AGENT_URL: "http://data-dog-agent:8126"
+      #DD_ENV: "development"
+      #DD_SERVICE: "WebApi.OpenTelemetry.DataDog"
+      #DD_VERSION: "1"
+      #DD_LOGS_INJECTION: "true"
+    ports:
+      - "8000:80"
+    depends_on:
+      - otel-collector
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.19.0
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "1888:1888"   # pprof extension
+      - "13133:13133" # health_check extension
+      - "4317:4317"        # OTLP gRPC receiver
+
+  #data-dog-agent:
+  #  image: "gcr.io/datadoghq/agent:7"
+  #  links:
+  #    - web
+  #  environment:
+  #    DD_API_KEY: "2f79ac1503bf67bb403fb09639d4677a"
+  #    DD_SITE: "datadoghq.com"
+  #    DD_TRACE_ENABLED: "false"
+  #    DD_APM_ENABLED: "false"
+  #    DD_APM_NON_LOCAL_TRAFFIC: "false"
+  #    DD_LOGS_ENABLED: "true"
+  #    DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL: "true"
+  #    DD_CONTAINER_EXCLUDE_LOGS: "name:datadog-agent"
+  #  volumes:
+  #    - /var/run/docker.sock:/var/run/docker.sock:ro
+  #    - /proc/:/host/proc/:ro
+  #    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+  #  depends_on:
+  #    - web
