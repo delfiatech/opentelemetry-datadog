@@ -42,7 +42,7 @@ services:
   #  links:
   #    - web
   #  environment:
-  #    DD_API_KEY: "2f79ac1503bf67bb403fb09639d4677a"
+  #    DD_API_KEY: "xxxxxxxxxxxxxxxxxxxxxxxx"
   #    DD_SITE: "datadoghq.com"
   #    DD_TRACE_ENABLED: "false"
   #    DD_APM_ENABLED: "false"
