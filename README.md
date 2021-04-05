@@ -20,10 +20,10 @@ Segue abaixo um diagrama exemplificando a iteração dos componentes
 
 # Como Executar
 
-1. No arquivo `docker-compose.yml` configure a API Key do Data Dog na variável `DD_API_KEY`;
+1. No arquivo `docker-compose.yml` configure a API Key do DataDog na variável `DD_API_KEY`;
     ![diagram](assets/dd_api_key_dockerfile.png)
 
-2. No arquivo `otel-collector-config.yaml` configure a API Key do Data Dog na Propriedade Key do Exporter `datadog/api`;
+2. No arquivo `otel-collector-config.yaml` configure a API Key do DataDog na Propriedade Key do Exporter `datadog/api`;
     
     ![diagram](assets/collector_key.png)
 
