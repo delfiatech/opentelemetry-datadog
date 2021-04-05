@@ -1,7 +1,15 @@
 # opentelemetry-datadog
-How to configure a opentelemetry instrumentation using datadog
+Como configururar o Open Telemetry para funcionar no DataDog.
+
+Essas configurações foram realizadas se baseando na documentação oficial da DataDog: 
+
+Link: https://docs.datadoghq.com/tracing/setup_overview/open_standards/#opentelemetry-collector-datadog-exporter
 
 
-Insert your api key on "otel-collector-config.yaml"
+# Configuração da stack
 
-Run "docker-compose up -d"
+Insira sua api key no arquivo "otel-collector-config.yaml"
+
+Execute o comando "docker-compose up -d"
+
+
